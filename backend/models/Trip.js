@@ -8,9 +8,6 @@ const tripSchema = new Schema({
     description: {
         type:String
     },
-    comments: {
-        type: String
-    },
     rating: {
         type: Number
     }, 
