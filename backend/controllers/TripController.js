@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Trip = require('../models/Trip')
 
-router.get('/trips', (req, res, next) => {
+router.get('/', (req, res, next) => {
     Trip.find() 
     .then(response => {
         res.json({
@@ -16,7 +16,7 @@ router.get('/trips', (req, res, next) => {
     })
 })
 
-router.post('/trip', (req, res, next) => {
+router.post('/show', (req, res, next) => {
     let tripID = req.body.tripID
     Trip.findById(tripID)
     .then(response => {
