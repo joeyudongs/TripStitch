@@ -19,6 +19,9 @@ const tripSchema = new Schema({
     },
     visitDate: {
         type: Date
+    },
+    photo: {
+        type: String
     }
 }, {timestamps: true})
 

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Trip = require('../models/Trip')
+const upload = require('../middlewares/upload')
 
 router.get('/', (req, res, next) => {
     Trip.find() 
@@ -31,7 +32,7 @@ router.post('/show', (req, res, next) => {
     })
 })
 
-router.post('/store', (req, res, next) => {
+router.post('/store', upload.single('photo'), (req, res, next) => {
     let trip = new Trip({
         title: req.body.title,
         description: req.body.description,
@@ -40,6 +41,9 @@ router.post('/store', (req, res, next) => {
         longitude: req.body.longitude,
         visitDate: req.body.visitDate
     })
+    if (req.file) {
+        trip.photo = req.file.path
+    }
     trip.save()
     .then(response => {
         res.json({
