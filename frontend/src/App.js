@@ -17,6 +17,7 @@ function App() {
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         onViewportChange={nextViewport => setViewport(nextViewport)}
+        mapStyle="mapbox://styles/mapbox/streets-v11"
         >
           <Marker
           latitude={41.8781}
@@ -24,7 +25,7 @@ function App() {
           offsetLeft={-20}
           offsetTop={-10}
           >
-            <div>You are here</div>
+            <Room></Room>
           </Marker>
         </ReactMapGL>
     </div>
