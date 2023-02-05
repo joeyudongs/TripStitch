@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import { useState } from "react";
+import {Room} from "@material-ui/icons";
 
 function App() {
+  const [viewport, setViewport] = useState({
+    width: "100vw",
+    height: "100vh",
+    latitude: 37.7577,
+    longitude: -122.4376,
+    zoom: 4,
+  });
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+       <ReactMapGL
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        onViewportChange={nextViewport => setViewport(nextViewport)}
         >
-          Learn React
-        </a>
-      </header>
+          <Marker
+          latitude={41.8781}
+          longitude={-87.6298}
+          offsetLeft={-20}
+          offsetTop={-10}
+          >
+            <div>You are here</div>
+          </Marker>
+        </ReactMapGL>
     </div>
   );
 }
