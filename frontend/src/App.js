@@ -2,6 +2,7 @@ import * as React from 'react';
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import { useState } from "react";
 import {Room} from "@material-ui/icons";
+import "./App.css";
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -34,7 +35,17 @@ function App() {
               closeOnClick={false}
               anchor="left"
             >
-              <div>Hello there!</div>
+              <div className="card">
+                <label>Title</label>
+                <h4 className='title'>Chicago</h4>
+                <label>Description</label>
+                <p className='desc'>The Windy City</p>
+                <label>Rating</label>
+                <p className='rating'>10</p>
+                <label>Information</label>
+                <span className='username'>Created by <b>John Donne</b></span>
+                <span className='date'>3 days ago</span>
+              </div>
             </Popup>
             
         </ReactMapGL>
