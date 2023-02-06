@@ -1,9 +1,9 @@
 # TripStitch
 Trip sharing application.
 ### Team members
-- [Rozmeen Jumma]
-- [Bailey Surowiec]
-- [Jon Doretti]
-- [Songling Jiang]
-- [George Floros]
-- [Yudong Sun]
+- [Rozmeen Jumma](https://github.com/)
+- [Bailey Surowiec](https://github.com/)
+- [Jon Doretti](https://github.com/)
+- [Songling Jiang](https://github.com/)
+- [George Floros](https://github.com/)
+- [Yudong Sun](https://github.com/joeyudongs)
