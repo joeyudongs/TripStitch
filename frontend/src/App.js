@@ -27,6 +27,16 @@ function App() {
           >
             <Room></Room>
           </Marker>
+          <Popup
+              latitude={41.8781}
+              longitude={-87.6298}
+              closeButton={true}
+              closeOnClick={false}
+              anchor="left"
+            >
+              <div>Hello there!</div>
+            </Popup>
+            
         </ReactMapGL>
     </div>
   );

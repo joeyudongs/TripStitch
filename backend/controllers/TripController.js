@@ -19,7 +19,7 @@ router.get('/', (req, res, next) => {
 
 router.post('/show', (req, res, next) => {
     let tripID = req.body.tripID
-    Trip.findById(tripID)
+    Trip.findById(tripID) 
     .then(response => {
         res.json({
             response
