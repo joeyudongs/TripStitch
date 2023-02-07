@@ -1,8 +1,9 @@
 import * as React from 'react';
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {Room} from "@material-ui/icons";
 import "./App.css";
+import axios from "axios"
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -12,6 +13,19 @@ function App() {
     longitude: -122.4376,
     zoom: 4,
   });
+  const [trips, setTrips] = useState([]);
+  useEffect(() => {
+    const getTrips = async () => {
+      try {
+        const allTrips = await axios.get("/trip");
+        setTrips(allTrips.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getTrips();
+  }, []);
+
   return (
     <div className="App">
        <ReactMapGL
@@ -20,34 +34,37 @@ function App() {
         onViewportChange={nextViewport => setViewport(nextViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         >
-          <Marker
-          latitude={41.8781}
-          longitude={-87.6298}
-          offsetLeft={-20}
-          offsetTop={-10}
-          >
-            <Room></Room>
-          </Marker>
-          <Popup
-              latitude={41.8781}
-              longitude={-87.6298}
-              closeButton={true}
-              closeOnClick={false}
-              anchor="left"
+          {trips.map((trip) => (
+            <>
+            <Marker
+            latitude={41.8781}
+            longitude={-87.6298}
+            offsetLeft={-20}
+            offsetTop={-10}
             >
-              <div className="card">
-                <label>Title</label>
-                <h4 className='title'>Chicago</h4>
-                <label>Description</label>
-                <p className='desc'>The Windy City</p>
-                <label>Rating</label>
-                <p className='rating'>10</p>
-                <label>Information</label>
-                <span className='username'>Created by <b>John Donne</b></span>
-                <span className='date'>3 days ago</span>
-              </div>
-            </Popup>
-            
+              <Room></Room>
+            </Marker>
+            <Popup
+                latitude={41.8781}
+                longitude={-87.6298}
+                closeButton={true}
+                closeOnClick={false}
+                anchor="left"
+              >
+                <div className="card">
+                  <label>Title</label>
+                  <h4 className='title'>Chicago</h4>
+                  <label>Description</label>
+                  <p className='desc'>The Windy City</p>
+                  <label>Rating</label>
+                  <p className='rating'>10</p>
+                  <label>Information</label>
+                  <span className='username'>Created by <b>John Donne</b></span>
+                  <span className='date'>3 days ago</span>
+                </div>
+              </Popup>
+              </>
+          ))}
         </ReactMapGL>
     </div>
   );
