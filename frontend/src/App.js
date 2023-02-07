@@ -18,7 +18,9 @@ function App() {
     const getTrips = async () => {
       try {
         const allTrips = await axios.get("/trip");
-        setTrips(allTrips.data);
+        console.log(allTrips);
+        setTrips(allTrips.data.response);
+        console.log("trips: ", trips);
       } catch (err) {
         console.log(err);
       }
@@ -34,35 +36,35 @@ function App() {
         onViewportChange={nextViewport => setViewport(nextViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         >
-          {trips.map((trip) => (
+          {trips.map(trip => (
             <>
-            <Marker
-            latitude={41.8781}
-            longitude={-87.6298}
-            offsetLeft={-20}
-            offsetTop={-10}
-            >
-              <Room></Room>
-            </Marker>
-            <Popup
-                latitude={41.8781}
-                longitude={-87.6298}
-                closeButton={true}
-                closeOnClick={false}
-                anchor="left"
+              <Marker
+              latitude={trip.latitude}
+              longitude={trip.longitude}
+              offsetLeft={-20}
+              offsetTop={-10}
               >
-                <div className="card">
-                  <label>Title</label>
-                  <h4 className='title'>Chicago</h4>
-                  <label>Description</label>
-                  <p className='desc'>The Windy City</p>
-                  <label>Rating</label>
-                  <p className='rating'>10</p>
-                  <label>Information</label>
-                  <span className='username'>Created by <b>John Donne</b></span>
-                  <span className='date'>3 days ago</span>
-                </div>
-              </Popup>
+                <Room></Room>
+              </Marker>
+              <Popup
+                  latitude={trip.latitude}
+                  longitude={trip.longitude}
+                  closeButton={true}
+                  closeOnClick={false}
+                  anchor="left"
+                >
+                  <div className="card">
+                    <label>Title</label>
+                    <h4 className='title'>{trip.title}</h4>
+                    <label>Description</label>
+                    <p className='desc'>{trip.description}</p>
+                    <label>Rating</label>
+                    <p className='rating'>10</p>
+                    <label>Information</label>
+                    <span className='username'>Created by <b>John Donne</b></span>
+                    <span className='date'>3 days ago</span>
+                  </div>
+                </Popup>
               </>
           ))}
         </ReactMapGL>
