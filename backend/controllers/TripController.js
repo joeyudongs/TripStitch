@@ -34,6 +34,7 @@ router.post('/show', (req, res, next) => {
 
 router.post('/store', upload.single('photo'), (req, res, next) => {
     let trip = new Trip({
+        username: req.body.username,
         title: req.body.title,
         description: req.body.description,
         rating: req.body.rating,
@@ -61,6 +62,7 @@ router.post('/update', (req, res, next) => {
     let tripID = req.body.tripID
 
     let updateData = {
+        username: req.body.username,
         title: req.body.title,
         description: req.body.description,
         rating: req.body.rating,

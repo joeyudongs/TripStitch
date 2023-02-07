@@ -2,6 +2,9 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const tripSchema = new Schema({
+    username: {
+        type: String
+    },
     title: {
         type:String
     },
