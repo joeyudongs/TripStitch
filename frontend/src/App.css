@@ -1,6 +1,6 @@
 .card {
-  width: 250px;
-  height: 250px;
+  width: 300px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -22,4 +22,11 @@ label {
 }
 .date {
   font-size: 12px;
+}
+img {
+  height: 200px;
+  width: auto;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
 }

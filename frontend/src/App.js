@@ -63,6 +63,8 @@ function App() {
                     <label>Information</label>
                     <span className='username'>Created by <b>John Donne</b></span>
                     <span className='date'>3 days ago</span>
+                    <label>Photo</label>
+                    <img src={trip.photo} ></img>
                   </div>
                 </Popup>
               </>

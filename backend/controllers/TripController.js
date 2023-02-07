@@ -43,7 +43,7 @@ router.post('/store', upload.single('photo'), (req, res, next) => {
         visitDate: req.body.visitDate
     })
     if (req.file) {
-        trip.photo = req.file.path
+        trip.photo = "http://localhost:8080/" + req.file.path
     }
     trip.save()
     .then(response => {
