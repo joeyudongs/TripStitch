@@ -3,7 +3,7 @@ const router = express.Router()
 const Trip = require('../models/Trip')
 const upload = require('../middlewares/upload')
 const User = require('../models/User')
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const privateKey = '';
 
