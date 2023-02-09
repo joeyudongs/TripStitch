@@ -7,6 +7,6 @@ Trip sharing application.
 - [Rozmeen Jumma](https://github.com/)
 - [Bailey Surowiec](https://github.com/baileysurowiec)
 - [Jon Doretti](https://github.com/)
-- [Songling Jiang](https://github.com/)
-- [George Floros](https://github.com/gfloros1)
+- [Songling Jiang](https://github.com/sljiang93)
+- [George Floros](https://github.com/)
 - [Yudong Sun](https://github.com/joeyudongs)
