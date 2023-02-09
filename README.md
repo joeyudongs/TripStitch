@@ -4,7 +4,7 @@ Trip sharing application.
 
 ### Team members
 
-- [Rozmeen Jumma](https://github.com/)
+- [Rozmeen Jumma](https://github.com/rjumma93)
 - [Bailey Surowiec](https://github.com/baileysurowiec)
 - [Jon Doretti](https://github.com/)
 - [Songling Jiang](https://github.com/sljiang93)
