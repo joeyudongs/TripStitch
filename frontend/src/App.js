@@ -15,6 +15,7 @@ function App() {
   });
   const [trips, setTrips] = useState([]);
   const [curPlaceId, setCurPlaceId] = useState(null);
+  const [newTrip, setNewTrip] = useState(null);
   useEffect(() => {
     const getTrips = async () => {
       try {
@@ -31,6 +32,14 @@ function App() {
   const handleMarkerClick = (id) => {
     setCurPlaceId(id)
   };
+  const handleAddClick = (e) => {
+    console.log(e);
+    const[longitude, latitude] = e.lngLat;
+    setNewTrip({
+      latitude: latitude,
+      longitude: longitude
+    })
+  }
   return (
     <div className="App">
        <ReactMapGL
@@ -38,6 +47,7 @@ function App() {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         onViewportChange={nextViewport => setViewport(nextViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
+        onDblClick={handleAddClick}
         >
           {trips.map(trip => (
             <>
@@ -49,7 +59,7 @@ function App() {
               >
                 <Room onClick={()=>handleMarkerClick(trip._id)}></Room>
               </Marker>
-              
+
               {trip._id === curPlaceId &&
                 <Popup
                     latitude={trip.latitude}
@@ -57,6 +67,7 @@ function App() {
                     closeButton={true}
                     closeOnClick={false}
                     anchor="left"
+                    onClose={()=>setCurPlaceId(null)}
                   >
                     <div className="card">
                       <label>Title</label>
@@ -75,6 +86,18 @@ function App() {
                 }
               </>
           ))}
+          {newTrip && (
+            <Popup
+            latitude={newTrip.latitude}
+            longitude={newTrip.longitude}
+            closeButton={true}
+            closeOnClick={false}
+            anchor="left"
+            onClose={()=>setNewTrip(null)}
+          >
+            Add New Trip
+            </Popup>
+          )}
         </ReactMapGL>
     </div>
   );
