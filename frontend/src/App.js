@@ -14,6 +14,7 @@ function App() {
     zoom: 4,
   });
   const [trips, setTrips] = useState([]);
+  const [curPlaceId, setCurPlaceId] = useState(null);
   useEffect(() => {
     const getTrips = async () => {
       try {
@@ -27,7 +28,9 @@ function App() {
     };
     getTrips();
   }, []);
-
+  const handleMarkerClick = (id) => {
+    setCurPlaceId(id)
+  };
   return (
     <div className="App">
        <ReactMapGL
@@ -44,29 +47,32 @@ function App() {
               offsetLeft={-20}
               offsetTop={-10}
               >
-                <Room></Room>
+                <Room onClick={()=>handleMarkerClick(trip._id)}></Room>
               </Marker>
-              <Popup
-                  latitude={trip.latitude}
-                  longitude={trip.longitude}
-                  closeButton={true}
-                  closeOnClick={false}
-                  anchor="left"
-                >
-                  <div className="card">
-                    <label>Title</label>
-                    <h4 className='title'>{trip.title}</h4>
-                    <label>Description</label>
-                    <p className='desc'>{trip.description}</p>
-                    <label>Rating</label>
-                    <p className='rating'>10</p>
-                    <label>Information</label>
-                    <span className='username'>Created by <b>John Donne</b></span>
-                    <span className='date'>3 days ago</span>
-                    <label>Photo</label>
-                    <img src={trip.photo} ></img>
-                  </div>
-                </Popup>
+              
+              {trip._id === curPlaceId &&
+                <Popup
+                    latitude={trip.latitude}
+                    longitude={trip.longitude}
+                    closeButton={true}
+                    closeOnClick={false}
+                    anchor="left"
+                  >
+                    <div className="card">
+                      <label>Title</label>
+                      <h4 className='title'>{trip.title}</h4>
+                      <label>Description</label>
+                      <p className='desc'>{trip.description}</p>
+                      <label>Rating</label>
+                      <p className='rating'>10</p>
+                      <label>Information</label>
+                      <span className='username'>Created by <b>John Donne</b></span>
+                      <span className='date'>3 days ago</span>
+                      <label>Photo</label>
+                      <img src={trip.photo} alt="text"></img>
+                    </div>
+                  </Popup>
+                }
               </>
           ))}
         </ReactMapGL>
