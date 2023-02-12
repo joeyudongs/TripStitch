@@ -16,6 +16,9 @@ function App() {
   const [trips, setTrips] = useState([]);
   const [curPlaceId, setCurPlaceId] = useState(null);
   const [newTrip, setNewTrip] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [rating, setRating] = useState(0);
   useEffect(() => {
     const getTrips = async () => {
       try {
@@ -96,7 +99,21 @@ function App() {
             anchor="left"
             onClose={()=>setNewTrip(null)}
           >
-            Add New Trip
+            <div>
+              <form >
+                <label>Title</label>
+                <input placeholder='Enter a title'
+                onChange={(e) => setTitle(e.target.value)} />
+                <label>Description</label>
+                <textarea placeholder='Descripe this place'
+                onChange={(e) => setDescription(e.target.value)} />
+                <label>Rating</label>
+                <input placeholder='Enter a number between 1-10'
+                onChange={(e) => setRating(e.target.value)} />
+                <label>VisitDate</label>
+                <button className='submitButton' type="submit">Add Trip</button>
+              </form>
+            </div>
             </Popup>
           )}
         </ReactMapGL>
