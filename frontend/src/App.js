@@ -29,8 +29,9 @@ function App() {
     };
     getTrips();
   }, []);
-  const handleMarkerClick = (id) => {
-    setCurPlaceId(id)
+  const handleMarkerClick = (id, lat, long) => {
+    setCurPlaceId(id);
+    setViewport({...viewport, latitude:lat, longitude:long})
   };
   const handleAddClick = (e) => {
     console.log(e);
@@ -57,7 +58,7 @@ function App() {
               offsetLeft={-20}
               offsetTop={-10}
               >
-                <Room onClick={()=>handleMarkerClick(trip._id)}></Room>
+                <Room onClick={()=>handleMarkerClick(trip._id, trip.latitude, trip.longitude)}></Room>
               </Marker>
 
               {trip._id === curPlaceId &&
