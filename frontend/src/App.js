@@ -20,13 +20,12 @@ function App() {
   const [description, setDescription] = useState(null);
   const [rating, setRating] = useState(0);
   const [visitDate, setVisitDate] = useState(null);
+  const [photo, setPhoto] = useState(null);
   useEffect(() => {
     const getTrips = async () => {
       try {
         const allTrips = await axios.get("/trip");
-        console.log(allTrips);
         setTrips(allTrips.data.response);
-        console.log("trips: ", trips);
       } catch (err) {
         console.log(err);
       }
@@ -38,7 +37,6 @@ function App() {
     setViewport({...viewport, latitude:lat, longitude:long})
   };
   const handleAddClick = (e) => {
-    console.log(e);
     const[longitude, latitude] = e.lngLat;
     setNewTrip({
       latitude: latitude,
@@ -47,18 +45,18 @@ function App() {
   }
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-    const newPin = {
-      username: "John Doe3",
-      title,
-      description,
-      rating,
-      latitude: newTrip.latitude,
-      longitude: newTrip.longitude,
-      visitDate
-    };
+    
+    const newPin = new FormData();
+    newPin.append("username", "John Doe0");
+    newPin.append("title", title);
+    newPin.append("description", description);
+    newPin.append("rating", rating);
+    newPin.append("latitude", newTrip.latitude);
+    newPin.append("longitude", newTrip.longitude);
+    newPin.append("visitDate", visitDate);
+    newPin.append("photo", photo);
     try {
       const res = await axios.post("/trip/store", newPin);
-      console.log(res);
       setTrips([...trips, res.data.response]);
       setNewTrip(null);
     } catch(err) {
@@ -134,6 +132,10 @@ function App() {
                 <label>VisitDate</label>
                 <input type="date" 
                 onChange={(e) => setVisitDate(e.target.value)} />
+                <label>SelectPhoto</label>
+                <input type="file"
+                onChange={(e) => {
+                  setPhoto(e.target.files[0])}} />
                 <button className='submitButton' type="submit">Add Trip</button>
               </form>
             </div>
