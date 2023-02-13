@@ -44,6 +44,24 @@ function App() {
       longitude: longitude
     })
   }
+  const handleSubmitForm = async (e) => {
+    e.preventDefault();
+    const newPin = {
+      username: "John Doe3",
+      title,
+      description,
+      rating,
+      latitude: newTrip.latitude,
+      longitude: newTrip.longitude,
+    };
+    try {
+      const res = await axios.post("/trip/store", newPin);
+      setTrips([...trips, res.data]);
+      setNewTrip(null);
+    } catch(err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="App">
        <ReactMapGL
@@ -79,10 +97,10 @@ function App() {
                       <label>Description</label>
                       <p className='desc'>{trip.description}</p>
                       <label>Rating</label>
-                      <p className='rating'>10</p>
+                      <p className='rating'>{trip.rating}</p>
                       <label>Information</label>
-                      <span className='username'>Created by <b>John Donne</b></span>
-                      <span className='date'>3 days ago</span>
+                      <span className='username'>Created by {trip.username}</span>
+                      <span className='date'>Visited on: {new Date(trip.visitDate).toLocaleDateString()}</span>
                       <label>Photo</label>
                       <img src={trip.photo} alt="text"></img>
                     </div>
@@ -100,7 +118,7 @@ function App() {
             onClose={()=>setNewTrip(null)}
           >
             <div>
-              <form >
+              <form onSubmit={handleSubmitForm}>
                 <label>Title</label>
                 <input placeholder='Enter a title'
                 onChange={(e) => setTitle(e.target.value)} />

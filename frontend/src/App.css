@@ -39,10 +39,10 @@ form {
   justify-content: space-between;
 }
 
-input, textarea {
-  boarder: none;
+/* input, textarea {
+  boarder: 1px solid gray;
   border-bottom: 1px solid gray;
-}
+} */
 input::placeholder, textarea::placeholder {
   font-size: 12px;
   color:rgba(71, 75, 78, 0.495)
