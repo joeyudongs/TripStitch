@@ -48,7 +48,7 @@ router.post('/store', upload.single('photo'), (req, res, next) => {
     trip.save()
     .then(response => {
         res.json({
-            message: 'Trip Added Successfully!'
+            response
         })
     })
     .catch(error => {

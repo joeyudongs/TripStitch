@@ -19,6 +19,7 @@ function App() {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [rating, setRating] = useState(0);
+  const [visitDate, setVisitDate] = useState(null);
   useEffect(() => {
     const getTrips = async () => {
       try {
@@ -53,10 +54,12 @@ function App() {
       rating,
       latitude: newTrip.latitude,
       longitude: newTrip.longitude,
+      visitDate
     };
     try {
       const res = await axios.post("/trip/store", newPin);
-      setTrips([...trips, res.data]);
+      console.log(res);
+      setTrips([...trips, res.data.response]);
       setNewTrip(null);
     } catch(err) {
       console.log(err);
@@ -129,6 +132,8 @@ function App() {
                 <input placeholder='Enter a number between 1-10'
                 onChange={(e) => setRating(e.target.value)} />
                 <label>VisitDate</label>
+                <input type="date" 
+                onChange={(e) => setVisitDate(e.target.value)} />
                 <button className='submitButton' type="submit">Add Trip</button>
               </form>
             </div>
