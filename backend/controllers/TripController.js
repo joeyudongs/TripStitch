@@ -40,7 +40,7 @@ router.post('/store', upload.single('photo'), (req, res, next) => {
         rating: req.body.rating,
         latitude: req.body.latitude,
         longitude: req.body.longitude,
-        visitDate: req.body.visitDate
+        visitDate: req.body.visitDate,
     })
     if (req.file) {
         trip.photo = "http://localhost:8080/" + req.file.path
@@ -48,12 +48,12 @@ router.post('/store', upload.single('photo'), (req, res, next) => {
     trip.save()
     .then(response => {
         res.json({
-            message: 'Trip Added Successfully!'
+            response
         })
     })
     .catch(error => {
         res.json({
-            message: 'An error Occurred!'
+            error
         })
     })
 })
