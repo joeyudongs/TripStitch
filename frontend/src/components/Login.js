@@ -1,7 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { useContext, useState, useEffect } from "react";
-import { useResource } from "react-request-hook";
+import {useState} from "react";
 
 
 export default function Login() {
@@ -11,16 +10,16 @@ export default function Login() {
     function handlePassword(e){
         setPassword(e.target.value);
     }
+    function handleUsername(e){
+      setUsername(e.target.value);
+    }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const loginCredentials = new FormData(); 
-        loginCredentials.append("username", username);
-        loginCredentials.append("password", password);
         try{
-        const res = await axios.post("/user/login", loginCredentials);
-        console.log(res.data.response);
+        const res = await axios.post("/user/login", {"username": username, "password": password});
+        console.log(res.data.username);
         }
         catch(err){
             console.log(err);
@@ -36,7 +35,7 @@ export default function Login() {
           <input
             type="text"
             value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={handleUsername}
             name="login-username"
             id="login-username"
           />

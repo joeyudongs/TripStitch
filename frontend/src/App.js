@@ -5,6 +5,7 @@ import {Room} from "@material-ui/icons";
 import "./App.css";
 import axios from "axios"
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
   const [viewport, setViewport] = useState({
@@ -66,7 +67,7 @@ function App() {
   }
   return (
     <div className="App">
-      <><Login/></>
+      <><Login/><Register/></>
        <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
