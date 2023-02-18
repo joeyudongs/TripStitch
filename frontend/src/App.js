@@ -67,7 +67,6 @@ function App() {
   }
   return (
     <div className="App">
-      <><Login/><Register/></>
        <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
