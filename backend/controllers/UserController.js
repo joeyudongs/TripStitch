@@ -4,9 +4,6 @@ const User = require('../models/User')
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 
-const privateKey = `MIICWwIBAAKBgHP1EaGgqEE5LiXH9uIbX3IEhtpSwX8wKC7oPJd44E2/35UoG4PuXJPUXBCGS51/fsignZ1JgQ8Gx2XFNgC6tfkd0lzcqn9czbMKFMwezpbD3iGTGD65RhirSFJfQjoornzNACzRRtlh6bvUIsc3PA7O9CkaTfTDZ0MudIg/5XyjAgMBAAECgYAudZhU29vOFizpMk82lKUPN8UYIGQqo47WDHKKdgHY5PGd/23W1F//Uux4KnaNahHQLJo59MNi0+J8YiGa9TQHS0XFdXN3GiO06CvxEvuhEfGJhQl4BvIPoj77k9WsihJDf6I6VTtQ8l6yz+tvnpncOtjmG++OFklX3aJLLwFvkQJBALz+PWIDrFR83oBiGbOHDN1YE2L9HgSrqQlB/iUUyUT/X1kfyLvP5lnLRqx6XJgLKHBMtjiPrs8I+FVrWtDNPv0CQQCdEc9israWak4TQQG2NOC2oO4WVqC2EJfgH1kEGFbwXrTDtRWbOt8qXMOrrpUl/c4MPbeCb7FbCQDIIPpBowwfAkAbijjLpZlhHmkV8DWqkY1wW7tHe3b6W0FglftA0AycP1JXnGgV5i+8+gAsdhA0H7we0S7kgxuIE9iMKf6r2pzJAkA+OqkslFuMum9WZ4HzG34QPTA2/3lKyMYzUJgm7DG9p/f8Nclqp+d01C3d3hxPYf/5j5YeAnyE8csyfwZHbP7HAkEAlYwYbC+VLTKBBmMyZRADYBSZSqp5gTn3DIT9RX4Bpj5bPmBRVnohZlzbSDSS8UmOGiU0AG1jNhbop8xB5y5SGQ==`;
-
-
 // login route
 // does the user in database exist
 router.post("/login", async function (req, res, next) {
