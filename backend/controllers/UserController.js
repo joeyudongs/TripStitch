@@ -1,11 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
-
-const privateKey = ``;
-
 
 // login route
 // does the user in database exist
@@ -20,12 +17,9 @@ router.post("/login", async function (req, res, next) {
           .compare(req.body.password, user.password)
           .then((result) => {
             if (result === true) {
-              const token = jwt.sign({ id: user._id }, privateKey, {
-                algorithm: "RS256",
-              });
               return res
                 .status(200)
-                .json({ username: user.username, access_token: token });
+                .json({ username: user.username, message: "Login successful" });
             } else {
               return res.status(401).json({ error: "Invalid credentials." });
             }
@@ -61,26 +55,18 @@ router.post("/register", async function (req, res, next) {
           password: req.hashedPassword,
         });
         return user
-          .save()
-          .then((savedUser) => {
-            const token = jwt.sign({ id: user._id }, privateKey, {
-              algorithm: "RS256",
-            });
-            return res.status(201).json({
-              id: savedUser._id,
-              username: savedUser.username,
-              access_token: token,
-            });
-          })
-          .catch((error) => {
-            return res.status(500).json({ error: "Something went wrong." });
-          });
+          .save().then(() => {
+            res.json({
+                message: 'New User Registered!'
+            })
+        })
+
       }
       res.status(400).json({ error: "Passwords not matching" });
-    } else {
-      res.status(400).json({ error: "Username or Password Missing" });
-    }
-  });
+    } 
+    else {res.status(400).json({ error: "Username or Password Missing" });}
+  }
+  );
 
 
 module.exports = router
