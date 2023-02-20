@@ -1,11 +1,11 @@
 import * as React from 'react';
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import Map, { Marker, Popup } from "react-map-gl";
 import { useState, useEffect } from "react";
 import {Room} from "@material-ui/icons";
 import "../App.css";
 import axios from "axios"
 
-function Map(){
+function MapInfo(){
     const token = '';
 
     const [viewport, setViewport] = useState({
@@ -67,7 +67,7 @@ function Map(){
       }
       return (
         <div className="App">
-           <ReactMapGL
+           <Map
             {...viewport}
             mapboxApiAccessToken={token}
             onViewportChange={nextViewport => setViewport(nextViewport)}
@@ -143,8 +143,8 @@ function Map(){
                 </div>
                 </Popup>
               )}
-            </ReactMapGL>
+            </Map>
         </div>
       );
 }
-export default Map
+export default MapInfo
