@@ -7,18 +7,11 @@ import axios from "axios";
 import {Editor, EditingMode, DrawLineStringMode} from "react-map-gl-draw";
 
 function MapInfo(){
-  const token = '';
-  const[user, setUser] = useState();
-
-  useEffect(()=>{
-    const loggedInUser = localStorage.getItem("userData");
-    if(loggedInUser){
-      const foundUser = JSON.parse(loggedInUser)
-      setUser(foundUser);
-    }
-  }, [] // leave empty
-  );
-
+    const token = process.env.REACT_APP_MAPBOX_TOKEN;
+    const MODES = [
+      { id: "drawPolyline", text: "Draw Polyline", handler: DrawLineStringMode },
+      { id: "editing", text: "Edit Feature", handler: EditingMode }
+    ];
 
     const [viewport, setViewport] = useState({
         width: "100vw",
