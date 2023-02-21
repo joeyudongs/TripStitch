@@ -36,7 +36,7 @@ export default function Login() {
 
     // if there's a user show the message below
     if (user) {
-      return <div>{user.username} is loggged in</div>;
+      return <div>{user.username} is logged in</div>;
     }
   
     return (

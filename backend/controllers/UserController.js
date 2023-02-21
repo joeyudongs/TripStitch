@@ -58,7 +58,7 @@ router.post("/register", async function (req, res, next) {
           .save().then(() => {
             res.json({
                 userid: user._id,
-            })
+            }).status(200)
         })
 
       }

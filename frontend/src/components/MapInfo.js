@@ -6,7 +6,18 @@ import "../App.css";
 import axios from "axios"
 
 function MapInfo(){
-    const token = '';
+  const token = '';
+  const[user, setUser] = useState();
+
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem("userData");
+    if(loggedInUser){
+      const foundUser = JSON.parse(loggedInUser)
+      setUser(foundUser);
+    }
+  }, [] // leave empty
+  );
+
 
     const [viewport, setViewport] = useState({
         width: "100vw",
@@ -49,7 +60,7 @@ function MapInfo(){
         e.preventDefault();
         
         const newPin = new FormData();
-        newPin.append("username", "John Doe0");
+        newPin.append("username", user.username);
         newPin.append("title", title);
         newPin.append("description", description);
         newPin.append("rating", rating);
