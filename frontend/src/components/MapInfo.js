@@ -3,7 +3,8 @@ import Map, { Marker, Popup } from "react-map-gl";
 import { useState, useEffect } from "react";
 import {Room} from "@material-ui/icons";
 import "../App.css";
-import axios from "axios"
+import axios from "axios";
+import {Editor, EditingMode, DrawLineStringMode} from "react-map-gl-draw";
 
 function MapInfo(){
   const token = '';
@@ -34,6 +35,8 @@ function MapInfo(){
       const [rating, setRating] = useState(0);
       const [visitDate, setVisitDate] = useState(null);
       const [photo, setPhoto] = useState(null);
+      const [modeId, setModeId] = useState(null);
+      const [modeHandler, setModeHandler] = useState(null);
       useEffect(() => {
         const getTrips = async () => {
           try {
@@ -76,6 +79,30 @@ function MapInfo(){
           console.log(err);
         }
       }
+      const switchMode = (e) => {
+        const tmp = e.target.value === modeId ? null : e.target.value;
+        setModeId(tmp);
+        const mode = MODES.find(m => m.id === tmp);
+        const mtmp = mode ? new mode.handler() : null
+        setModeHandler(mtmp);
+      }
+      const renderToolbar = () => {
+        return (
+          <div
+            style={{ position: "absolute", top: 0, right: 0, maxWidth: "320px" }}
+          >
+            <select onChange={switchMode}>
+              <option value="">--Please choose a draw mode--</option>
+              {MODES.map(mode => {
+                return (<option key={mode.id} value={mode.id}>
+                  {mode.text}
+                </option>)
+                }
+              )}
+            </select>
+          </div>
+        );
+      };
       return (
         <div className="App">
            <Map
@@ -85,6 +112,13 @@ function MapInfo(){
             mapStyle="mapbox://styles/mapbox/streets-v11"
             onDblClick={handleAddClick}
             >
+              <Editor
+                // to make the lines/vertices easier to interact with
+                clickRadius={12}
+                mode={modeHandler}
+                onSelect={_ => {}}
+              />
+              {renderToolbar()}
               {trips.map(trip => (
                 <>
                   <Marker
