@@ -20,6 +20,9 @@ function App() {
   const [description, setDescription] = useState(null);
   const [rating, setRating] = useState(0);
   const [visitDate, setVisitDate] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  
   useEffect(() => {
     const getTrips = async () => {
       try {
@@ -33,6 +36,20 @@ function App() {
     };
     getTrips();
   }, []);
+
+
+
+  useEffect(() => {
+    const results = trips.filter(trip =>
+      trip.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  const handleSearch = e => {
+    setSearchTerm(e.target.value);
+  };
+
   const handleMarkerClick = (id, lat, long) => {
     setCurPlaceId(id);
     setViewport({...viewport, latitude:lat, longitude:long})
@@ -67,6 +84,16 @@ function App() {
   }
   return (
     <div className="App">
+      <div className='search-container'>
+        <input type='text' placeholder='Search Trips' onChange={handleSearch} />
+        <ul className='search-results'>
+          {searchResults.map(trip => (
+            <li key={trip._id} onClick={() => handleMarkerClick(trip._id, trip.latitude, trip.longitude)}>
+              {trip.title}
+            </li>
+          ))}
+        </ul>
+      </div>
        <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
