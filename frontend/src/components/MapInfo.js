@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Map, { Marker, Popup } from "react-map-gl";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {Room} from "@material-ui/icons";
 import "../App.css";
 import axios from "axios";
 import {Editor, EditingMode, DrawLineStringMode} from "react-map-gl-draw";
+import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import Geocoder from 'react-map-gl-geocoder';
 
 function MapInfo(){
     const token = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -20,6 +22,7 @@ function MapInfo(){
         longitude: -122.4376,
         zoom: 4,
       });
+      const mapRef = useRef();
       const [trips, setTrips] = useState([]);
       const [curPlaceId, setCurPlaceId] = useState(null);
       const [newTrip, setNewTrip] = useState(null);
@@ -99,6 +102,7 @@ function MapInfo(){
       return (
         <div className="App">
            <Map
+            ref={mapRef}
             {...viewport}
             mapboxApiAccessToken={token}
             onViewportChange={nextViewport => setViewport(nextViewport)}
@@ -181,6 +185,12 @@ function MapInfo(){
                 </div>
                 </Popup>
               )}
+              <Geocoder
+                mapRef={mapRef}
+                onViewportChange={nextViewport => setViewport(nextViewport)}
+                mapboxApiAccessToken={token}
+                position="top-left"
+              />
             </Map>
         </div>
       );
