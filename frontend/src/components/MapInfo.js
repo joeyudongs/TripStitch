@@ -59,7 +59,7 @@ function MapInfo(){
         e.preventDefault();
         
         const newPin = new FormData();
-        newPin.append("username", "John Doe0");
+        newPin.append("username", user.username);
         newPin.append("title", title);
         newPin.append("description", description);
         newPin.append("rating", rating);

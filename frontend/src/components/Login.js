@@ -1,11 +1,13 @@
 import axios from "axios";
 import React from "react";
 import {useState} from "react";
+import Form from '../Form.css';
 
 
 export default function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const[user, setUser] = useState();
 
     function handlePassword(e){
         setPassword(e.target.value);
@@ -14,12 +16,17 @@ export default function Login() {
       setUsername(e.target.value);
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const user = {username, password};
         try{
-        const res = await axios.post("/user/login", {"username": username, "password": password});
-        console.log(res.data.username);
+        const res = await axios.post("/user/login", user);
+        // set the state of the user
+        setUser(res.data);
+        // use local storage
+        localStorage.setItem('userData', JSON.stringify(res.data));
+        localStorage.setItem('userID', res.data.userid);
+        window.location.reload();
         }
         catch(err){
             console.log(err);
@@ -28,6 +35,7 @@ export default function Login() {
   
     return (
       <>
+      <div className="form-box">
         <form
           onSubmit={handleSubmit}
         >
@@ -50,6 +58,7 @@ export default function Login() {
   
           <input type="submit" value="Login" disabled={username.length === 0} />
         </form>
+        </div>
       </>
     );
   }

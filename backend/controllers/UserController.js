@@ -19,7 +19,7 @@ router.post("/login", async function (req, res, next) {
             if (result === true) {
               return res
                 .status(200)
-                .json({ username: user.username, message: "Login successful" });
+                .json({ username: user.username, userid: user._id});
             } else {
               return res.status(401).json({ error: "Invalid credentials." });
             }
@@ -57,8 +57,8 @@ router.post("/register", async function (req, res, next) {
         return user
           .save().then(() => {
             res.json({
-                message: 'New User Registered!'
-            })
+                userid: user._id,
+            }).status(200)
         })
 
       }

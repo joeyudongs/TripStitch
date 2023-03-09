@@ -1,12 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-
+import Form from '../Form.css';
 
 export default function Register() {
     const[ username, setUsername] = useState("");
     const[ password, setPassword] = useState("");
     const[ repeatPassword, setPasswordRepeat] = useState("");
+    const[registered, setRegistered] = useState(false);
 
     function handlePassword(e) {setPassword(e.target.value)}
     function handlePasswordRepeat(e) {setPasswordRepeat(e.target.value)}
@@ -15,15 +16,24 @@ export default function Register() {
         e.preventDefault();
         try{
         const res = await axios.post("/user/register", {"username": username, "password": password, "passwordConfirmation": repeatPassword});
-        console.log(res.data.username);
+        if(res.status === 200){
+          setRegistered(true);
+        }
         }
         catch(err){
             console.log(err);
         }
     }
+
+    if(registered){
+      return (
+        <div> </div>
+      );
+    }
   
     return (
       <>
+      <div className="form-box">
             <form
               onSubmit={handleSubmit} >
             <label  htmlFor="register-username"> Username: </label>
@@ -54,6 +64,7 @@ export default function Register() {
                         username.length === 0 || password.length === 0 || password !== repeatPassword
                 } />
         </form>
+        </div>
       </>
     );
   }
