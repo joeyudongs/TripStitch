@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
-
+import Form from '../Form.css';
 
 export default function Register() {
     const[ username, setUsername] = useState("");
@@ -33,6 +33,7 @@ export default function Register() {
   
     return (
       <>
+      <div className="form-box">
             <form
               onSubmit={handleSubmit} >
             <label  htmlFor="register-username"> Username: </label>
@@ -63,6 +64,7 @@ export default function Register() {
                         username.length === 0 || password.length === 0 || password !== repeatPassword
                 } />
         </form>
+        </div>
       </>
     );
   }
