@@ -8,6 +8,7 @@ dotenv.config()
 mongoose.connect('mongodb://localhost:27017/TripStitchDB', {useNewUrlParser:true, useUnifiedTopology: true})
 const db = mongoose.connection
 const TripRoute = require('./controllers/TripController')
+const UserRoute = require('./controllers/UserController')
 
 db.on('error', (err)=>{
     console.log(err)
@@ -21,6 +22,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use('/api/trip', TripRoute)
+app.use('/api/user', UserRoute)
 app.use('/myuploads', express.static('myuploads'))
 
 const PORT = process.env.PORT || 8080
