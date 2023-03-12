@@ -13,7 +13,3 @@ jobs:
       - name: fronted Install
         working-directory: ./frontend
         run: npm install
-#Everything above this comment currently works!
-      - name: backend Launch
-        working-directory: ./backend
-        run: npm start
