@@ -7,9 +7,9 @@ jobs:
       - run: node --version
       - run: npm --version
       - uses: actions/checkout@v3
-      - name: BackEnd Install
+      - name: backend Install
         working-directory: ./backend
         run: npm install
-      - name: Frontend Install
+      - name: backend Install
         working-directory: ./frontend
         run: npm install
