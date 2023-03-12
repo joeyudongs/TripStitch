@@ -10,6 +10,6 @@ jobs:
       - name: backend Install
         working-directory: ./backend
         run: npm install
-      - name: backend Install
+      - name: fronted Install
         working-directory: ./frontend
         run: npm install
