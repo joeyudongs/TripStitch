@@ -1,0 +1,15 @@
+on: push
+jobs:
+  build-node:
+    runs-on: ubuntu-latest
+    container: node:16
+    steps:
+      - run: node --version
+      - run: npm --version
+      - uses: actions/checkout@v3
+      - name: backend Install
+        working-directory: ./backend
+        run: npm install
+      - name: fronted Install
+        working-directory: ./frontend
+        run: npm install
